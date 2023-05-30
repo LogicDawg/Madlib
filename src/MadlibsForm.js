@@ -2,18 +2,17 @@ import React, {useState} from "react";
 import './MadlibsForm.css'
 
 
-
 const MadlibForm = ({createMadLib}) => {
-    
+    // Set Form with empty fields
     const INITIAL_STATE = {
         noun: "",
         noun2: "",
         adjective: "",
         color: ""
     }
-    const [madLib, setMadLib] = useState(INITIAL_STATE)
+    //Form data state management
     const [formData,setFormData] = useState(INITIAL_STATE);
-
+    //Handle changes to form fields
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(formData => ({
@@ -21,12 +20,14 @@ const MadlibForm = ({createMadLib}) => {
           [name]: value
         }));
       };
-
+      // Handle submit button, and gather field information.
     const gatherInput = (e) => {
-        createMadLib(noun,noun2,adjective,color);
         e.preventDefault();
+        createMadLib(noun,noun2,adjective,color);
         setFormData({ noun: "", noun2: "", adjective: "", color: "" });
     };
+
+    //Deconstructing formData object.
     const {noun,noun2,adjective,color} = formData;
           
 
@@ -62,12 +63,8 @@ const MadlibForm = ({createMadLib}) => {
             type="text"
             placeholder="Color"
             />
-            <button>Submit!</button>
-            
-        </form>
-        
-        
-        
+            <button>Get Story!</button>           
+        </form>     
         </>
 
     )
