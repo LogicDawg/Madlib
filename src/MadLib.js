@@ -2,24 +2,33 @@ import { useState } from "react";
 import MadlibForm from "./MadlibsForm";
 
 const MadLib = () => {
-const INITIAL_STATE = {
-        noun: "x",
-        noun2: "x",
-        adjective: "x",
-        color: "x"
-    }
-const [madLib,setMadLib] = useState()    
+const [isActive,setisActive] = useState(false);
+const [madLib,setMadLib] = useState()  
+const reset = () => {
+    setisActive(false);
+}  
 const createMadLib = (noun,noun2,adjective,color) => {
-    setMadLib(<p>There was once a {color}{noun} that loved a 
-        {adjective} {noun2}</p>)
+    setMadLib(<p>There was once a {color} {noun} that 
+    loved a {adjective} {noun2}</p>);
+    setisActive(true);
 }
-
-    return (
+    let controller = (
         <>
         <MadlibForm createMadLib={createMadLib} />
-        {madLib}
         </>
     )
+
+    if(isActive){
+        controller = (
+            <>
+            {madLib}
+            <button onClick={reset}>Reset Story</button>
+            </>
+        )
+    }
+
+    return controller;
+
 }
 
 export default MadLib;
